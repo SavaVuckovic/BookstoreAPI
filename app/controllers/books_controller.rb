@@ -15,7 +15,11 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.new(book_params)
+    @book = Book.new(params.require(:book).permit(:title, :author, :complete))
+    @book.category = Category.find_by(name: params[:category])
+
+    # debug
+    print params
 
     if @book.save
       render json: @book, status: :created, location: @book
@@ -42,10 +46,5 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def book_params
-      params.require(:book).permit(:title, :author, :category, :complete)
     end
 end
