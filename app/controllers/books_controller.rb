@@ -17,9 +17,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params.require(:book).permit(:title, :author, :complete))
     @book.category = Category.find_by(name: params[:category])
-
-    # debug
-    print params
+    @book.category_name = params[:category]
 
     if @book.save
       render json: @book, status: :created, location: @book

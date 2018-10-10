@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :destroy]
+  before_action :set_category, only: [:show, :books, :destroy]
 
   # GET /categories
   def index
@@ -11,6 +11,11 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   def show
     render json: @category
+  end
+
+  # GET /categories/1/books
+  def books
+    render json: @category.books
   end
 
   # POST /categories
