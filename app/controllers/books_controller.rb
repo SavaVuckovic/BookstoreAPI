@@ -28,7 +28,8 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1
   def update
-    if @book.update(book_params)
+    @book.category = Category.find_by(name: params[:category_name])
+    if @book.update(params.require(:book).permit(:title, :author, :complete, :category_name))
       render json: @book
     else
       render json: @book.errors, status: :unprocessable_entity
