@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # books
   resources :books
+  get '/books/:id/comments', to: 'books#comments'
   root 'books#index'
 
   # coments

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :update, :destroy]
+  before_action :set_book, only: [:show, :comments, :update, :destroy]
 
   # GET /books
   def index
@@ -11,6 +11,11 @@ class BooksController < ApplicationController
   # GET /books/1
   def show
     render json: @book
+  end
+
+  # GET /books/1/comments
+  def comments
+    render json: @book.comments
   end
 
   # POST /books
@@ -45,5 +50,6 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+
     end
 end
