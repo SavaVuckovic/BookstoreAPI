@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
+    @books = Book.order(updated_at: :desc)
 
     render json: @books
   end
